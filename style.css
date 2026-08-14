@@ -1,0 +1,1695 @@
+/* =========================================
+   JARVIS X — FUTURISTIC HUD
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --green: #00E676;
+
+    --green-soft:
+        rgba(0, 230, 118, 0.35);
+
+    --green-faint:
+        rgba(0, 230, 118, 0.08);
+
+    --background: #020806;
+
+    --panel:
+        rgba(7, 18, 14, 0.72);
+
+    --border:
+        rgba(0, 230, 118, 0.20);
+
+    --text: #F0F5F2;
+
+    --muted: #7F9087;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+
+body {
+
+    background:
+        var(--background);
+
+    color:
+        var(--text);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================
+   PREMIUM JARVIS BACKGROUND
+========================================= */
+
+.hud-background {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: -5;
+
+    background:
+        /* Main green atmospheric glow */
+        radial-gradient(
+            circle at 63% 52%,
+            rgba(0, 230, 118, 0.095) 0%,
+            rgba(0, 180, 90, 0.045) 18%,
+            transparent 42%
+        ),
+
+        /* Left subtle glow */
+        radial-gradient(
+            circle at 8% 75%,
+            rgba(0, 170, 90, 0.035) 0%,
+            transparent 30%
+        ),
+
+        /* Top subtle green atmosphere */
+        radial-gradient(
+            ellipse at 50% -10%,
+            rgba(0, 230, 118, 0.035),
+            transparent 45%
+        ),
+
+        /* Very subtle HUD grid */
+        linear-gradient(
+            rgba(0, 230, 118, 0.012) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0, 230, 118, 0.012) 1px,
+            transparent 1px
+        ),
+
+        /* Main black background */
+        #020604;
+
+    background-size:
+        auto,
+        auto,
+        auto,
+        90px 90px,
+        90px 90px,
+        auto;
+
+    background-position:
+        center,
+        center,
+        center,
+        center,
+        center,
+        center;
+
+}
+
+
+/* Subtle cinematic vignette */
+
+.hud-background::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0, 0, 0, 0.28) 100%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* Very subtle futuristic frame */
+
+.hud-background::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 18px;
+
+    border:
+        1px solid
+        rgba(0, 230, 118, 0.055);
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 80px
+        rgba(0, 230, 118, 0.018);
+
+}
+
+/* =========================================
+   TOP SYSTEM ONLINE
+========================================= */
+
+.system-online {
+
+    position: absolute;
+
+    top: 42px;
+
+    left: 42px;
+
+    padding:
+        9px 18px;
+
+    border:
+        1px solid
+        rgba(0, 230, 118, 0.25);
+
+    border-radius: 30px;
+
+    background:
+        rgba(0, 230, 118, 0.04);
+
+    color: #B7C7BF;
+
+    font-size: 11px;
+
+    letter-spacing: 0.8px;
+
+}
+
+
+.online-dot {
+
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    margin-right: 9px;
+
+    border-radius: 50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 10px
+        var(--green);
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.top-header {
+
+    height: 125px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+}
+
+
+.brand {
+
+    text-align: center;
+
+}
+
+
+.brand h1 {
+
+    font-size: 54px;
+
+    font-weight: 400;
+
+    letter-spacing: 12px;
+
+    color:
+        var(--green);
+
+    text-shadow:
+        0 0 25px
+        rgba(0, 230, 118, 0.25);
+
+}
+
+
+.brand p {
+
+    margin-top: 7px;
+
+    color:
+        #7F9188;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.clock {
+
+    position: absolute;
+
+    right: 50px;
+
+    top: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+}
+
+
+.clock span {
+
+    font-size: 24px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.clock small {
+
+    margin-top: 5px;
+
+    color:
+        var(--green);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================
+   MAIN INTERFACE
+========================================= */
+
+.interface {
+
+    width: calc(100% - 70px);
+
+    height: calc(100vh - 150px);
+
+    margin:
+        0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        255px 375px 1fr;
+
+    gap: 18px;
+
+}
+
+
+/* =========================================
+   PANELS
+========================================= */
+
+.system-panel,
+.conversation-panel {
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        var(--panel);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-radius: 12px;
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(0, 230, 118, 0.015);
+
+}
+
+
+/* =========================================
+   SYSTEM PANEL
+========================================= */
+
+.system-panel {
+
+    padding: 22px 18px;
+
+    overflow: hidden;
+
+}
+
+
+.panel-title,
+.conversation-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 13px;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.title-icon,
+.conversation-icon {
+
+    color:
+        var(--green);
+
+    font-size: 17px;
+
+}
+
+
+.status-list {
+
+    margin-top: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 19px;
+
+}
+
+
+.status-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 11px;
+
+    color:
+        #B7C2BD;
+
+}
+
+
+.status-row span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.status-row i {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 8px
+        var(--green);
+
+}
+
+
+.status-row strong {
+
+    color:
+        var(--green);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+}
+
+
+.separator {
+
+    height: 1px;
+
+    margin:
+        22px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,230,118,0.20),
+            transparent
+        );
+
+}
+
+
+/* =========================================
+   METRICS
+========================================= */
+
+.metric {
+
+    margin-bottom: 21px;
+
+}
+
+
+.metric-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color:
+        #9AA8A1;
+
+    font-size: 10px;
+
+}
+
+
+.metric-header span:last-child {
+
+    color:
+        #D8E2DD;
+
+}
+
+
+.metric-bar {
+
+    width: 100%;
+
+    height: 5px;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+
+.metric-bar span {
+
+    display: block;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00A85A,
+            #00E676
+        );
+
+    box-shadow:
+        0 0 10px
+        rgba(0,230,118,0.35);
+
+}
+
+
+/* =========================================
+   SYSTEM INFO
+========================================= */
+
+.info-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+
+    font-size: 10px;
+
+    color:
+        #899891;
+
+}
+
+
+.info-row strong {
+
+    color:
+        #C6D1CB;
+
+    font-weight: 400;
+
+}
+
+
+/* =========================================
+   CONVERSATION
+========================================= */
+
+.conversation-panel {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 22px 14px 18px 18px;
+
+    min-height: 0;
+
+}
+
+
+.conversation-header {
+
+    flex-shrink: 0;
+
+    margin-bottom: 17px;
+
+}
+
+
+/* IMPORTANT */
+
+.conversation {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding-right: 10px;
+
+}
+
+
+.conversation::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+
+.conversation::-webkit-scrollbar-track {
+
+    background:
+        rgba(255,255,255,0.025);
+
+}
+
+
+.conversation::-webkit-scrollbar-thumb {
+
+    background:
+        var(--green);
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+.message {
+
+    padding:
+        14px 15px;
+
+    margin-bottom: 10px;
+
+    border:
+        1px solid
+        rgba(0,230,118,0.12);
+
+    border-radius: 12px;
+
+    background:
+        rgba(0,0,0,0.20);
+
+}
+
+
+.message-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+}
+
+
+.message-top span {
+
+    color:
+        var(--green);
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+}
+
+
+.message-top time {
+
+    color:
+        #5F6E66;
+
+    font-size: 9px;
+
+}
+
+
+.message p {
+
+    color:
+        #C8D2CD;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+}
+
+
+.user-message {
+
+    border-color:
+        rgba(255,255,255,0.06);
+
+}
+
+
+.user-message .message-top span {
+
+    color:
+        #A6B5AE;
+
+}
+
+
+/* =========================================
+   JARVIS CORE
+========================================= */
+
+.jarvis-core {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 0;
+
+}
+
+
+/* =========================================
+   ORB
+========================================= */
+
+.orb-wrapper {
+
+    width: 390px;
+
+    height: 390px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* Rings */
+
+.orb-ring {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(0,230,118,0.25);
+
+}
+
+
+.ring-outer {
+
+    width: 380px;
+
+    height: 380px;
+
+    box-shadow:
+        0 0 35px
+        rgba(0,230,118,0.07);
+
+    animation:
+        rotateRing
+        25s linear infinite;
+
+}
+
+
+.ring-middle {
+
+    width: 330px;
+
+    height: 330px;
+
+    border-color:
+        rgba(0,230,118,0.38);
+
+    border-top-color:
+        var(--green);
+
+    border-bottom-color:
+        transparent;
+
+    animation:
+        rotateRingReverse
+        13s linear infinite;
+
+}
+
+
+.ring-inner {
+
+    width: 275px;
+
+    height: 275px;
+
+    border:
+        2px solid
+        rgba(0,230,118,0.55);
+
+    border-left-color:
+        transparent;
+
+    border-right-color:
+        transparent;
+
+    box-shadow:
+        0 0 30px
+        rgba(0,230,118,0.12);
+
+    animation:
+        rotateRing
+        9s linear infinite;
+
+}
+
+
+/* =========================================
+   MAIN ORB
+========================================= */
+
+.jarvis-orb {
+
+    width: 205px;
+
+    height: 205px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 48%,
+            #A4FFD0 0%,
+            #19EF83 12%,
+            #00C967 35%,
+            #008F4B 65%,
+            #00492B 100%
+        );
+
+    box-shadow:
+
+        0 0 30px
+        rgba(0,230,118,0.65),
+
+        0 0 75px
+        rgba(0,230,118,0.35),
+
+        inset 0 0 35px
+        rgba(0,0,0,0.25);
+
+    z-index: 5;
+
+    animation:
+        orbPulse
+        4s ease-in-out infinite;
+
+}
+
+
+/* =========================================
+   ORB HEX GRID
+========================================= */
+
+.orb-grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.35;
+
+    background-image:
+
+        linear-gradient(
+            30deg,
+            rgba(255,255,255,0.10) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(255,255,255,0.10) 87.5%,
+            rgba(255,255,255,0.10)
+        ),
+
+        linear-gradient(
+            150deg,
+            rgba(255,255,255,0.10) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(255,255,255,0.10) 87.5%,
+            rgba(255,255,255,0.10)
+        );
+
+    background-size:
+        25px 43px;
+
+    border-radius: 50%;
+
+}
+
+
+/* =========================================
+   ORB HIGHLIGHT
+========================================= */
+
+.orb-highlight {
+
+    position: absolute;
+
+    width: 75px;
+
+    height: 75px;
+
+    top: 18px;
+
+    left: 42px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.40);
+
+    filter:
+        blur(18px);
+
+}
+
+
+/* =========================================
+   JARVIS TEXT
+========================================= */
+
+.jarvis-core h2 {
+
+    margin-top: -5px;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    letter-spacing: 6px;
+
+}
+
+
+.jarvis-listening {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 8px;
+
+    color:
+        var(--green);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.listening-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+        0 0 12px
+        var(--green);
+
+}
+
+
+/* =========================================
+   COMMAND
+========================================= */
+
+.command-area {
+
+    width: min(610px, 90%);
+
+    height: 58px;
+
+    margin-top: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+        1px solid
+        rgba(0,230,118,0.55);
+
+    border-radius: 16px;
+
+    background:
+        rgba(2,10,7,0.75);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,230,118,0.06);
+
+    overflow: hidden;
+
+}
+
+
+#command-input {
+
+    flex: 1;
+
+    height: 100%;
+
+    padding:
+        0 20px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color:
+        white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+}
+
+
+#command-input::placeholder {
+
+    color:
+        #65736C;
+
+}
+
+
+.mic-button {
+
+    width: 68px;
+
+    height: 100%;
+
+    border: none;
+
+    border-left:
+        1px solid
+        rgba(0,230,118,0.25);
+
+    background:
+        rgba(0,230,118,0.05);
+
+    color:
+        var(--green);
+
+    cursor: pointer;
+
+}
+
+
+.mic-button svg {
+
+    width: 25px;
+
+    height: 25px;
+
+}
+
+
+.mic-button:hover {
+
+    background:
+        rgba(0,230,118,0.12);
+
+}
+
+
+/* =========================================
+   STOP
+========================================= */
+
+/* =========================================
+   STOP JARVIS BUTTON
+========================================= */
+
+/* =========================================
+   JARVIS STOP BUTTON — POSITION FIX
+========================================= */
+
+#stop-button {
+
+    position: fixed;
+
+    /* Move it slightly downward */
+    right: 19%;
+
+    bottom: 52px;
+
+    z-index: 9999;
+
+    padding: 8px 18px;
+
+    min-width: 185px;
+
+    height: 38px;
+
+    border-radius: 9px;
+
+    border: 1px solid rgba(255, 80, 80, 0.65);
+
+    background: rgba(8, 14, 12, 0.94);
+
+    color: #ff7777;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.4px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+    box-shadow:
+        0 0 16px rgba(255, 50, 50, 0.10);
+
+}
+
+
+/* SHOW */
+
+#stop-button.visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+/* HOVER */
+
+#stop-button:hover {
+
+    background:
+        rgba(255, 50, 50, 0.12);
+
+    border-color:
+        rgba(255, 110, 110, 0.85);
+
+    color:
+        #ff9999;
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 50, 50, 0.18);
+
+}
+
+
+/* CLICK */
+
+#stop-button:active {
+
+    transform: scale(0.96);
+
+}
+
+
+.stop-button.visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+.stop-button:hover {
+
+    background:
+        rgba(255, 50, 50, 0.16);
+
+    border-color:
+        rgba(255, 100, 100, 0.7);
+
+    box-shadow:
+        0 0 15px
+        rgba(255, 60, 60, 0.12);
+
+}
+
+
+/* =========================================
+   HIDDEN RESPONSE
+========================================= */
+
+.hidden-response {
+
+    display: none;
+
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes orbPulse {
+
+    0%,
+    100% {
+
+        transform:
+            scale(0.97);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.03);
+
+    }
+
+}
+
+
+@keyframes rotateRing {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes rotateRingReverse {
+
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .interface {
+
+        grid-template-columns:
+            220px 320px 1fr;
+
+    }
+
+    .orb-wrapper {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
+    .ring-outer {
+
+        width: 315px;
+        height: 315px;
+
+    }
+
+    .ring-middle {
+
+        width: 275px;
+        height: 275px;
+
+    }
+
+    .ring-inner {
+
+        width: 235px;
+        height: 235px;
+
+    }
+
+    .jarvis-orb {
+
+        width: 175px;
+        height: 175px;
+
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    body {
+
+        overflow-y: auto;
+
+    }
+
+    .interface {
+
+        height: auto;
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .system-panel,
+    .conversation-panel {
+
+        display: none;
+
+    }
+
+    .jarvis-core {
+
+        min-height: 650px;
+
+    }
+
+}
+/* =========================================
+   ACTIVE MICROPHONE
+========================================= */
+
+.mic-button.active {
+
+    background:
+        rgba(0, 230, 118, 0.16);
+
+    color:
+        #00E676;
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(0, 230, 118, 0.12),
+
+        0 0 18px
+        rgba(0, 230, 118, 0.12);
+
+}
+
+
+.mic-button.active svg {
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(0, 230, 118, 0.8)
+        );
+
+}
+/* =========================================
+   JARVIS STOP BUTTON
+========================================= */
+
+#stop-button {
+
+    position: fixed;
+
+    right: 19%;
+
+    bottom: 82px;
+
+    z-index: 9999;
+
+    padding: 10px 22px;
+
+    border-radius: 8px;
+
+    border: 1px solid rgba(255, 80, 80, 0.65);
+
+    background: rgba(15, 10, 10, 0.92);
+
+    color: #ff7777;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+
+    box-shadow:
+        0 0 20px rgba(255, 50, 50, 0.12);
+
+}
+
+
+#stop-button.visible {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+#stop-button:hover {
+
+    background: rgba(255, 50, 50, 0.12);
+
+    border-color: #ff7777;
+
+    box-shadow:
+        0 0 25px rgba(255, 50, 50, 0.25);
+
+}
+
+
+#stop-button:active {
+
+    transform: scale(0.96);
+
+}
+/* =========================================
+   JARVIS VOICE STATES
+========================================= */
+
+/* LISTENING STATE */
+
+.jarvis-listening .jarvis-orb {
+
+    animation:
+        jarvisListening 1.4s ease-in-out infinite;
+
+}
+
+
+.jarvis-listening .orb-ring {
+
+    animation:
+        ringListening 1.8s linear infinite;
+
+}
+
+
+/* SPEAKING STATE */
+
+.jarvis-speaking .jarvis-orb {
+
+    animation:
+        jarvisSpeaking 0.65s ease-in-out infinite;
+
+}
+
+
+.jarvis-speaking .orb-ring {
+
+    animation:
+        ringSpeaking 1.2s linear infinite;
+
+}
+
+
+/* =========================================
+   LISTENING ANIMATION
+========================================= */
+
+@keyframes jarvisListening {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        filter:
+            brightness(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.06);
+
+        filter:
+            brightness(1.25);
+
+    }
+
+}
+
+
+@keyframes ringListening {
+
+    0% {
+
+        transform: scale(1);
+
+        opacity: 0.65;
+
+    }
+
+    50% {
+
+        transform: scale(1.04);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 0.65;
+
+    }
+
+}
+
+
+/* =========================================
+   SPEAKING ANIMATION
+========================================= */
+
+@keyframes jarvisSpeaking {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        filter:
+            brightness(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.1);
+
+        filter:
+            brightness(1.35);
+
+    }
+
+}
+
+
+@keyframes ringSpeaking {
+
+    0% {
+
+        transform: scale(1);
+
+        opacity: 0.45;
+
+    }
+
+    50% {
+
+        transform: scale(1.08);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 0.45;
+
+    }
+
+}

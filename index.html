@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>JARVIS X</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- Futuristic Background -->
+    <div class="hud-background"></div>
+
+    <!-- Top System Indicator -->
+    <div class="system-online">
+        <span class="online-dot"></span>
+        SYSTEM ONLINE
+    </div>
+
+
+    <!-- Main Header -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <h1>JARVIS X</h1>
+
+            <p>
+                BY Hamza Ahmed
+            </p>
+
+        </div>
+
+
+        <div class="clock">
+
+            <span id="current-time">
+                00:00:00
+            </span>
+
+            <small>
+                LOCAL TIME
+            </small>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN INTERFACE -->
+
+    <main class="interface">
+
+
+        <!-- ==================================
+             LEFT SYSTEM PANEL
+        =================================== -->
+
+        <aside class="system-panel">
+
+            <div class="panel-title">
+
+                <span class="title-icon">
+                    ◈
+                </span>
+
+                SYSTEM STATUS
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="status-list">
+
+<div class="status-row">
+
+    <span>
+        <i></i>
+        BACKEND
+    </span>
+
+    <strong id="backend-status">
+        ONLINE
+    </strong>
+
+</div>
+
+
+<div class="status-row">
+
+    <span>
+        <i></i>
+        VOICE SYSTEM
+    </span>
+
+    <strong id="voice-status">
+        READY
+    </strong>
+
+</div>
+
+
+<div class="status-row">
+
+    <span>
+        <i></i>
+        AI MODEL
+    </span>
+
+    <strong id="ai-status">
+        ONLINE
+    </strong>
+
+</div>
+
+
+            <div class="separator"></div>
+
+
+           <!-- CPU -->
+
+<div class="metric">
+
+    <div class="metric-header">
+
+        <span>
+            CPU USAGE
+        </span>
+
+        <span id="cpu-value">
+            0%
+        </span>
+
+    </div>
+
+    <div class="metric-bar">
+
+        <span
+            id="cpu-bar"
+            style="width: 0%">
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- MEMORY -->
+
+<div class="metric">
+
+    <div class="metric-header">
+
+        <span>
+            MEMORY USAGE
+        </span>
+
+        <span id="memory-value">
+            0%
+        </span>
+
+    </div>
+
+    <div class="metric-bar">
+
+        <span
+            id="memory-bar"
+            style="width: 0%">
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- DISK -->
+
+<div class="metric">
+
+    <div class="metric-header">
+
+        <span>
+            DISK USAGE
+        </span>
+
+        <span id="disk-value">
+            0%
+        </span>
+
+    </div>
+
+    <div class="metric-bar">
+
+        <span
+            id="disk-bar"
+            style="width: 0%">
+        </span>
+
+    </div>
+
+</div>
+
+            <div class="separator"></div>
+
+
+            <!-- EXTRA SYSTEM INFO -->
+
+            <div class="info-row">
+
+                <span>
+                    NETWORK
+                </span>
+
+                <strong>
+                    STABLE
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    SYSTEM TEMP
+                </span>
+
+                <strong>
+                    48°C
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    POWER
+                </span>
+
+                <strong>
+                    AC POWER
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    ACTIVE PROCESSES
+                </span>
+
+                <strong>
+                    128
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    VERSION
+                </span>
+
+                <strong>
+                    JARVIS X 1.0.3
+                </strong>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- ==================================
+             CONVERSATION PANEL
+        =================================== -->
+
+        <section class="conversation-panel">
+
+
+            <div class="conversation-header">
+
+                <span class="conversation-icon">
+                    ▢
+                </span>
+
+                CONVERSATION
+
+            </div>
+
+
+            <!-- SCROLLABLE CHAT -->
+
+            <div
+                class="conversation"
+                id="conversation"
+            >
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             RIGHT JARVIS CORE
+        =================================== -->
+
+        <section class="jarvis-core">
+
+
+            <!-- Orb -->
+
+            <div class="orb-wrapper">
+
+
+                <div class="orb-ring ring-outer"></div>
+
+                <div class="orb-ring ring-middle"></div>
+
+                <div class="orb-ring ring-inner"></div>
+
+
+                <div class="orb-particles"></div>
+
+
+                <div class="jarvis-orb">
+
+                    <div class="orb-highlight"></div>
+
+                    <div class="orb-grid"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JARVIS NAME -->
+
+            <h2>
+                JARVIS
+            </h2>
+
+
+            <!-- STATUS -->
+
+            <div class="jarvis-listening">
+
+                <span
+                    class="listening-dot"
+                    id="status-dot">
+                </span>
+
+                <span id="status-text">
+                    READY TO LISTEN
+                </span>
+
+            </div>
+
+
+
+            <!-- RESPONSE -->
+
+            <div
+                class="hidden-response"
+                id="response-area">
+
+                <span id="response-text">
+                </span>
+
+            </div>
+
+
+
+            <!-- COMMAND -->
+
+            <div class="command-area">
+
+                <input
+                    type="text"
+                    id="command-input"
+                    placeholder="Type a command..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    class="mic-button"
+                    id="mic-button"
+                    title="Activate JARVIS"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+
+                        <path
+                            d="M12 15.5C14.21 15.5 16 13.71 16 11.5V6.5C16 4.29 14.21 2.5 12 2.5C9.79 2.5 8 4.29 8 6.5V11.5C8 13.71 9.79 15.5 12 15.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M19 11.5C19 15.37 15.87 18.5 12 18.5C8.13 18.5 5 15.37 5 11.5"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M12 18.5V22"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                        <path
+                            d="M9 22H15"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- STOP BUTTON -->
+
+            <button
+                class="stop-button"
+                id="stop-button"
+            >
+
+                ■ STOP JARVIS
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
